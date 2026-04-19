@@ -9,21 +9,20 @@ public class ItemMapper {
     public static ItemResponseDto toResponseDto(Item item) {
         ItemResponseDto itemResponseDto = new ItemResponseDto();
 
+        itemResponseDto.setId(item.getItemId());
         itemResponseDto.setName(item.getName());
         itemResponseDto.setDescription(item.getDescription());
         itemResponseDto.setAvailable(item.getAvailable());
-        itemResponseDto.setId(item.getItemId());
 
         return itemResponseDto;
     }
 
-    public static Item toEntityItemDto(ItemDto itemDto, long userId) {
+    public static Item toEntity(ItemDto dto) {
         Item item = new Item();
 
-        item.setName(itemDto.getName());
-        item.setDescription(itemDto.getDescription());
-        item.setAvailable(itemDto.getAvailable());
-        item.setUserId(userId);
+        item.setName(dto.getName());
+        item.setDescription(dto.getDescription());
+        item.setAvailable(dto.getAvailable());
 
         return item;
     }

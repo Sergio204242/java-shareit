@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import ru.practicum.shareit.exception.duplicate.DuplicateEmailException;
 import ru.practicum.shareit.exception.notfound.NotFoundException;
+import ru.practicum.shareit.exception.validation.ValidationException;
 
 @ControllerAdvice
 public class ErrorHandler {
@@ -51,6 +52,15 @@ public class ErrorHandler {
         );
 
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> handleValidation(ValidationException ex) {
+        ErrorResponse error = new ErrorResponse(
+                ex.getMessage(),
+                ex.getClass().getSimpleName()
+        );
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 }
 
